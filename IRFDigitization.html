@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Ares -
+    <#USER field="Username" />
+  </title>
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <link rel=stylesheet href="css/xc2_default.css" type="text/css" />
+<!--ENABLE JQUERY -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+
+  <script language="javascript" src="js/xc2_default.js"></script>
+  <script language="javascript" src="js/xc2_inpage.js"></script>
+  <script language="javascript" src="js/arescal.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/fat.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
+  <!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="css/ie6_or_less.css" />
+<![endif]-->
+  <script type="text/javascript" src="js/aresajax.js"></script>
+  <script type="text/javascript" src="js/fat.js"></script>
+  <style>
+    /*#timecodes {display:none}*/
+
+    form.f-wrap-request label select {
+      width: 25.5em;
+    }
+  </style>
+
+</head>
+
+<body id="type-b">
+  <div id="wrap">
+    <#INCLUDE filename="include_header.html">
+      <div id="content-wrap">
+        <#INCLUDE filename="include_instructorcoursemenu.html">
+
+          <div id="content">
+
+            <form action="ares.dll" method="post" name="CreateItem" class="f-wrap-request">
+              <input type="hidden" name="Action" value="11" />
+              <input type="hidden" name="CourseID" value="<#COURSE field=" CourseID "/>"/>
+              <input type="hidden" name="CopyrightRequired" value="No" />
+              <input type="hidden" name="Type" value="10" />
+              <input type="hidden" name="ItemType" value="SER" />
+              <input type="hidden" name="format" value="Digitization" />
+              <input type="hidden" name="DocumentType" value="digirequest" />
+              <input type="hidden" name="SessionID" value="<#PARAM name=" SessionID ">">
+
+
+              <div class="req"><b>*</b> Indicates required field</div>
+              <fieldset>
+                <h3>Streaming Request </h3>
+                <span style="background-color:#E6F4FF ;font-size: 110%">
+                  <#STATUS class="fade">
+                </span>
+                <p>
+
+                  <!--Include description text on policies or processes governing digitization.-->
+                </p>
+                <label for="Title">
+                  <#ERROR Name="ERRORTitle">
+                    <b><span class="req">*</span><span class="<#VALIDATION name="ERRORTitle">">Title</span><br />
+                		<span class="note">Please do not abbreviate unless your citation is abbreviated</span></b>
+                    <textarea id="Title" name="Title" rows="2" cols="40" class="f-name" tabindex="5">
+                      <#PARAM Name="title" />
+                    </textarea>
+                    <br />
+                </label>
+                <!--Author of Streaming Request-->
+
+                <label for="Author">
+                  <#ERROR Name="ERRORAuthor">
+                    <b><span class="req">*</span>
+						<span class="<#VALIDATION name="ERRORAuthor">">Author/Director</span><br/>
+						<span class="note">(Last Name, First Name)</span></b>
+                    <input id="Author" name="Author" type="text" size="40" class="f-name" tabindex="10" value="<#PARAM Name=" author "/>">
+                    <br />
+                </label>
+                <!--Publisher of Streaming Request-->
+                <label for="Publisher">
+                  <#ERROR Name="ERRORPublisher">
+                    <b><span class="<#VALIDATION name="ERRORPublisher">">Publisher/Producer</span></b>
+                    <input id="Publisher" name="Publisher" type="text" size="40" class="f-name" tabindex="15" value="<#PARAM Name=" publisher "/>">
+                    <br />
+                </label>
+                <!--Publication Location of Streaming Request-->
+                <label for="PubPlace">
+                  <#ERROR Name="ERRORPubPlace">
+                    <b><span class="<#VALIDATION name="ERRORPubPlace">">Place of Publication</span></b>
+                    <input id="PubPlace" name="PubPlace" type="text" size="40" class="f-name" tabindex="20" value="<#PARAM Name=" pubplace "/>">
+                    <br />
+                </label>
+                <!--PubDate of Streaming Request-->
+                <label for="PubDate">
+                  <#ERROR Name="ERRORPubDate">
+                    <b><span class="<#VALIDATION name="ERRORPubDate">">Date of Publication</span></b>
+                    <input id="PubDate" name="PubDate" type="text" size="40" class="f-name" tabindex="25" value="<#PARAM Name=" pubdate "/>">
+                    <br />
+                </label>
+                <!--Edition of Streaming Request-->
+                <label for="Edition">
+                  <#ERROR Name="ERROREdition">
+                    <b><span class="<#VALIDATION name="ERROREdition">">Edition</span></b>
+                    <input id="Edition" name="Edition" type="text" size="40" class="f-name" tabindex="30" value="<#PARAM Name=" edition "/>">
+                    <br />
+                </label>
+
+
+                <label for="ISSN">
+                  <#ERROR Name="ERRORISXN">
+                    <b><span class="<#VALIDATION name="ERRORISXN">">ISBN (International Standard Book Number)</span><br />
+                		<span class="note">If given will speed request processing</span></b>
+                    <input id="ISXN" name="ISXN" type="text" size="20" class="f-name" tabindex="35" value="<#PARAM Name=" ISXN "/>">
+                    <br />
+                </label>
+
+                <label for="CallNumber">
+                  <#ERROR name="ERRORCallNumber">
+                    <b><span class="<#VALIDATION name="ERRORCallNumber">">Library Call Number</span></b>
+                    <input id="CallNumber" name="CallNumber" type="text" size="20" class="f-name" tabindex="40" value="<#PARAM Name=" callnumber "/>">
+                    <br />
+                </label>
+
+                <!--jQuery function that checks if the entire item should be digitized-->
+
+                <!--Full Digitization-->
+                <label for="FullDigitization">
+                  <#ERROR name="ERRORFullDigitization">
+                    <b>Should the entire item be digitized?</b>
+
+                    <fieldset>
+                      <select id="FullDigitization" name="ReferenceNumber" size="1" class="f-name" tabindex="45">
+                        <option selected>
+                          <#PARAM Name="ReferenceNumber">
+                        </option>
+                        <option value="Digitize the Entire Work">Digitize the Entire Work</option>
+                        <option value="Digitize a portion of the Work">Digitize a portion of the Work</option>
+                      </select>
+                    </fieldset>
+                </label>
+
+
+
+                <!--Begin and End Time Codes - These are tied to the pages field in Ares-->
+                <div id="timecodes">
+                  <label for="Pages">
+                    <#ERROR name="ERRORPages">
+                      <b><span class="<#VALIDATION name="ERRORPages">">Start and End Time Codes</span><br />
+                     <span class="note">If this is for a segment to be digitized, please provide the start and stop times of the section to be digitized.  An example would be 5:10 - 15:30</span></b>
+
+                      <input id="Pages" name="Pages" type="text" size="40" class="f-name" tabindex="50" value="<#PARAM name=" Pages ">">
+                      <br />
+                  </label>
+                </div>
+
+                <!--Description Streaming Request-->
+                <div id="description">
+                  <label for="Description">
+                    <#ERROR name="ERRORDescription">
+                      <b>Description of Clip<br />
+                        <span class="note">Please Describe the Clip to be digitized, include dialogue included in the clip, or add other important information that will help us identify the clip</span>
+                        </b>
+
+                      <textarea id="Description" name="Description" rows="6" cols="40" class="f-name" tabindex="55">
+                        <#PARAM Name="description" />
+                      </textarea>
+                      <br />
+                  </label>
+
+                </div>
+
+                <!--Subtitles Inclusion - Tied to ItemINfo2 Field-->
+                <label for="Subtitles">
+                  <label for="Subtitles">
+                    <#ERROR name="ERRORSubTitles">
+                      <b>Should the item be digitized with subtitles?</b>
+                      <fieldset>
+                        <select id="Subtitles" name="ItemInfo2" size="1" class="f-name" tabindex="60">
+
+                          <option selected>
+                            <#PARAM name="ItemInfo2">
+                          </option>
+
+                          <option>Do not Include Subtitles</option>
+
+                          <option>Include Subtitles</option>
+
+                        </select>
+                        <br />
+                      </fieldset>
+                  </label>
+
+
+
+
+                  <label for="Notes">
+                    <b>Other Notes<br />
+                		<span class="note">Please include any additional notes</span></b>
+                    <textarea id="Notes" name="ItemNote" rows="5" cols="40" class="f-name" tabindex="65">
+                      <#PARAM Name="ItemNote" />
+                    </textarea>
+                    <br />
+                  </label>
+
+
+                  <label for="ItemTags">
+                    <#ERROR name="ItemTags">
+                      <b>Tags
+					<br/><span class="note">Comma separated list of tags to be assigned to this Item<span>
+				</b>
+                      <textarea id="ItemTags" name="ItemTags" tabindex="70" rows="4">
+                        <#PARAM name="ItemTags" />
+                      </textarea>
+                      <br />
+                  </label>
+
+
+
+
+                  <!--Supply Method-->
+
+                  <label for="SupplyMethod">
+                    <b>How will this item be supplied?</b>
+                    <#ERROR name="ERRORSupplyMethod">
+                      <fieldset>
+
+                        <label for="StaffSearch">
+                          <input id="StaffSearch" type="radio" <#PARAM Name="SELECTED" Identifier="SupplyMethod" Value="StaffSearch"> name="SupplyMethod" value="StaffSearch" class="f-radio" tabindex="215" checked /> Please have library staff pull the material from the shelves or request the materials and have it digitized</label>
+
+
+                        <label for="WillDeliver">
+                          <input id="WillDeliver" type="radio" <#PARAM Name="SELECTED" Identifier="SupplyMethod" Value="WillDeliver"> name="SupplyMethod" value="WillDeliver" class="f-radio" tabindex="205" /> I will bring the material to the library to be digitized</label>
+                      </fieldset>
+                  </label>
+                  <h2>Where did you learn about this item?</h2>
+
+                  <label for="CitedIn">
+                    <#ERROR name="ERRORCitedIn">
+                      <b>Where did you find this item cited?<br /><span class="note">Examples are Dissertation Abstracts, Dialog (specify which database), or a specific journal or book.</span></b>
+                      <textarea id="CitedIn" name="CitedIn" rows="2" cols="40" class="f-name" tabindex="300">
+                        <#PARAM Name="citedin" />
+                      </textarea>
+                      <br />
+                  </label>
+
+                  <#TABLE class="instructor-table" name="ItemRestrictions" classChoice="one" headerText="Reserve Restrictions" IncludeJavascriptCalendar="Yes" calendarText="<img src='images/cal.gif' alt='Open Calendar'/>" />
+
+
+                  <input type="submit" name="SubmitButton" tabindex="500" value="Submit Item" />
+                  <input type="reset" name="ClearButton" tabindex="505" value="Clear" />
+              </fieldset>
+            </form>
+
+            <div id="footer">
+              <p>
+                <#COPYRIGHT>
+              </p>
+              <#INCLUDE filename="include_footer.html">
+            </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+  <!--jQuery Code-->
+  <script>
+    hideAllDivs = function() {
+      $("#timecodes").hide();
+      $("#description").hide();
+    };
+
+    handleNewSelection = function() {
+
+      hideAllDivs();
+
+      switch ($(this).val()) {
+        case 'Digitize a portion of the Work':
+          $("#timecodes").show();
+          $("#description").show();
+          break;
+      }
+    };
+
+    $(document).ready(function() {
+
+      $("#FullDigitization").change(handleNewSelection);
+
+      // Run the event handler once now to ensure everything is as it should be
+      handleNewSelection.apply($("#FullDigitization"));
+
+    });
+  </script>
+</body>
+
+</html>

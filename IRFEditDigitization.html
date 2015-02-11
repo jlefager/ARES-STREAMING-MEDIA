@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Ares -
+    <#USER field="Username" />
+  </title>
+  <link rel="shortcut icon" href="favicon.ico" />
+
+  <link rel=stylesheet href="css/xc2_default.css" type="text/css" />
+  <!--ENABLE JQUERY -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  <script language="javascript" src="js/xc2_default.js"></script>
+  <script language="javascript" src="js/xc2_inpage.js"></script>
+  <script language="javascript" src="js/arescal.js"></script>
+  <!--For Rich Text Editor-->
+  <script type="text/javascript" src="js/FCKeditor/fckeditor.js"></script>
+  <!--Includes text Pad when necesary -->
+  <script type="text/javascript">
+    <!--
+    function ReplaceAllTextareas() {
+      // replace all of the textareas
+      var itemTextArea = document.getElementById("ItemText");
+      var oFCKeditor = new FCKeditor(itemTextArea.name);
+      oFCKeditor.BasePath = "js/FCKeditor/";
+      oFCKeditor.ReplaceTextarea();
+    }
+
+    function focusIframeOnTab(caller, tabTargetId, callEvent) {
+      // If keypress TAB and not SHIFT+TAB
+
+      if (callEvent.keyCode == 9 && !callEvent.shiftKey)
+        document.getElementById(tabTargetId).contentWindow.focus();
+    }
+     // -->
+  </script>
+
+
+  <link rel="stylesheet" type="text/css" href="css/fat.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
+  <!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="css/ie6_or_less.css" />
+<![endif]-->
+  <script type="text/javascript" src="js/aresajax.js"></script>
+  <script type="text/javascript" src="js/fat.js"></script>
+
+
+</head>
+
+<body id="type-b">
+  <div id="wrap">
+    <#INCLUDE filename="include_header.html">
+      <div id="content-wrap">
+        <#INCLUDE filename="include_instructorcoursemenu.html">
+
+          <div id="content">
+
+            <form action="ares.dll" method="post" name="CreateItem" class="f-wrap-request">
+              <input type="hidden" name="Action" value="11" />
+              <input type="hidden" name="CourseID" value="<#COURSE field=" CourseID "/>"/>
+              <input type="hidden" name="ItemID" value="<#ITEM field=" ItemID "/>">
+              <input type="hidden" name="Type" value="30" />
+              <input type="hidden" name="ItemType" value="SER" />
+              <input type="hidden" name="format" value="Digitization" />
+              <input id="SupplyMethod" type="hidden" value="" name="SupplyMethod">
+              <input type="hidden" name="SessionID" value="<#PARAM name=" SessionID ">">
+
+
+              <div class="req"><b>*</b> Indicates required field</div>
+              <fieldset>
+                <h3>Streaming Request </h3>
+                <span style="background-color:#E6F4FF ;font-size: 110%"><#STATUS class="fade"></span>
+
+                <p>This item is currenty at a status of: <span class="success"><#ITEM field="CurrentStatus"></span>
+                </p>
+                <#Include filename="include_viewdelete.html">
+
+                  <!--Title of Streaming Request-->
+                  <label for="Title">
+                    <#ERROR Name="ERRORTitle">
+                      <b><span class="req">*</span>Title<br />
+                		<span class="note">Please do not abbreviate unless your citation is abbreviated</span></b>
+                      <textarea id="Title" name="Title" rows="2" cols="40" class="f-name" tabindex="5">
+                        <#ITEM field="title" />
+                      </textarea>
+                      <br />
+                  </label>
+                  <!--Author of Streaming Request-->
+
+                  <label for="Author">
+                    <#ERROR Name="ERRORAuthor">
+                      <b><span class="req">*</span>Author/Editors<br/>
+						<span class="note">(Last Name, First Name)</span></b>
+                      <input id="Author" name="Author" type="text" size="40" class="f-name" tabindex="10" value="<#ITEM field=" author "/>">
+                      <br />
+                  </label>
+                  <!--Publisher of Streaming Request-->
+                  <label for="Publisher">
+                    <#ERROR Name="ERRORPublisher">
+                      <b>Publisher</b>
+                      <input id="Publisher" name="Publisher" type="text" size="40" class="f-name" tabindex="15" value="<#ITEM field=" publisher "/>">
+                      <br />
+                  </label>
+
+                  <label for="PubPlace">
+                    <#ERROR Name="ERRORPubPlace">
+                      <b>Place of Publication</b>
+                      <input id="PubPlace" name="PubPlace" type="text" size="40" class="f-name" tabindex="20" value="<#ITEM field=" pubplace "/>">
+                      <br />
+                  </label>
+
+                  <label for="PubDate">
+                    <#ERROR Name="ERRORPubDate">
+                      <b>Date of Publication</b>
+                      <input id="PubDate" name="PubDate" type="text" size="40" class="f-name" tabindex="25" value="<#ITEM field=" pubdate "/>">
+                      <br />
+                  </label>
+
+                  <label for="Edition">
+                    <#ERROR Name="ERROREdition">
+                      <b>Edition</b>
+                      <input id="Edition" name="Edition" type="text" size="40" class="f-name" tabindex="30" value="<#ITEM field=" edition "/>">
+                      <br />
+                  </label>
+
+
+                  <label for="ISSN">
+                    <#ERROR Name="ERRORISXN">
+                      <b>ISBN (International Standard Book Number)<br />
+                		<span class="note">If given will speed request processing</span></b>
+                      <input id="ISXN" name="ISXN" type="text" size="20" class="f-name" tabindex="35" value="<#ITEM field=" ISXN "/>">
+                      <br />
+                  </label>
+
+                  <label for="CallNumber">
+                    <#ERROR name="ERRORCallNumber">
+                      <b>Call Number</b>
+                      <input id="CallNumber" name="CallNumber" type="text" size="20" class="f-name" tabindex="40" value="<#ITEM field=" callnumber "/>">
+                      <br />
+                  </label>
+
+                  <!--Full Digitization-->
+                  <label for="FullDigitization">
+                    <#ERROR name="ERRORFullDigitization">
+                      <b>Should the entire item be digitized?</b>
+
+                      <fieldset>
+                        <select id="FullDigitization" name="ReferenceNumber" size="1" class="f-name" tabindex="45">
+                          <option selected>
+                            <#Item Field="ReferenceNumber">
+                          </option>
+                          <option>Digitize the Entire Work</option>
+                          <option>Digitize a portion of the Work</option>
+                        </select>
+                      </fieldset>
+                  </label>
+
+
+
+
+                  <!--Begin and End Time Codes-->
+                  <div id="timecodes">
+                    <label for="Pages">
+                      <#ERROR name="ERRORPages">
+                        <b><span class="<#VALIDATION name="ERRORPages">">Start and End Time Codes</span><br />
+                     <span class="note">If this is for a segment to be digitized, please provide the start and stop times of the section to be digitized.  An example would be 5:10 - 15:30</span></b>
+
+                        <input id="Pages" name="Pages" type="text" size="40" class="f-name" tabindex="50" value="<#ITEM field=" Pages ">">
+                        <br />
+                    </label>
+                  </div>
+
+                  <!--Description Field-->
+                  <div id="description">
+                    <label for="Description">
+                      <#ERROR name="ERRORDescription">
+                        <b>Description of Clip</b>
+
+                        <textarea id="Description" name="Description" rows="6" cols="40" class="f-name" tabindex="55">
+                          <#ITEM field="description" />
+                        </textarea>
+                        <br />
+                    </label>
+                  </div>
+
+
+                  <!--Text Area for Code Snippet  This is active when  a porition of the work is set to be digitized-->
+                  <div id="codesnippet">
+                    <label for="ItemText">
+                      <#ERROR name="ERRORItemContent">
+                        <b>Embed Code</b>
+                        <textarea id="ItemText" name="ItemText" tabindex="60" rows="15" cols="80">
+                          <#ITEM field="Text">
+                        </textarea>
+                        <br />
+                    </label>
+
+                  </div>
+
+                  <!--Subtitles Field-->
+                  <label for="Subtitles">
+                    <#ERROR name="ERRORSubTitles">
+                      <b>Should the item be digitized with subtitles?</b>
+
+                      <fieldset>
+                        <select id="Subtitles" name="ItemInfo2" size="1" class="f-name" tabindex="3">
+                          <option selected>
+                            <#Item Field="ItemInfo2">
+                          </option>
+                          <option>Do not Include Subtitles</option>
+                          <option>Include Subtitles</option>
+                        </select>
+                      </fieldset>
+                  </label>
+
+                  <!--Supply Method - URL - this is enabled when the full item should be digitized-->
+
+                  <div id="digitizationurl">
+
+                    <label for="URL">
+                      <#ERROR name="ERRORURL">
+                        <b>Streaming Website Url</b>
+                        <input id="URL" name="URL" type="text" size="40" class="f-name" tabindex="65" value="<#ITEM field=" Location ">">
+                        <br />
+                    </label>
+                  </div>
+
+
+                  <label for="ItemTags">
+                    <#ERROR name="ItemTags">
+                      <b>Tags
+					<br/><span class="note">Comma separated list of tags to be assigned to this Item<span>
+				</b>
+                      <textarea id="ItemTags" name="ItemTags" tabindex="70" rows="10">
+                        <#ITEM field="Tags" />
+                      </textarea>
+                      <br />
+                  </label>
+
+
+
+                  <h2>Where did you learn about this item?</h2>
+
+                  <label for="CitedIn">
+                    <#ERROR name="ERRORCitedIn">
+                      <b>Where did you find this item cited?<br /><span class="note">Examples are Dissertation Abstracts, Dialog (specify which database), or a specific journal or book.</span></b>
+                      <textarea id="CitedIn" name="CitedIn" rows="2" cols="40" class="f-name" tabindex="300">
+                        <#ITEM field="citedin" />
+                      </textarea>
+                      <br />
+                  </label>
+
+                  <#TABLE class="instructor-table" name="ItemRestrictions" classChoice="one" headerText="Reserve Restrictions" IncludeJavascriptCalendar="Yes" calendarText="<img src='images/cal.gif' alt='Open Calendar'/>" />
+
+
+                  <input type="submit" name="SubmitButton" tabindex="500" value="Submit Item" />
+                  <input type="reset" name="ClearButton" tabindex="505" value="Clear" />
+              </fieldset>
+            </form>
+
+            <div id="footer">
+              <p>
+                <#COPYRIGHT>
+              </p>
+              <#INCLUDE filename="include_footer.html">
+            </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+  <!--jQuery Code  - shows and hides text pad based on user choices-->
+  <script>
+    hideAllDivs = function() {
+      $("#timecodes").hide();
+      $("#description").hide();
+      $("#codesnippet").hide();
+      $("#digitizationurl").hide();
+    };
+
+    handleNewSelection = function() {
+
+      hideAllDivs();
+
+      switch ($(this).val()) {
+        case 'Digitize a portion of the Work':
+          $("#timecodes").show();
+          $("#description").show();
+          $("#codesnippet").show();
+          $("#SupplyMethod").val("Create");
+          break;
+        case 'Digitize the Entire Work':
+          $("#digitizationurl").show();
+          $("#SupplyMethod").val("WebLink");
+
+          break;
+      }
+    };
+
+    $(document).ready(function() {
+
+      $("#FullDigitization").change(handleNewSelection);
+
+      // Run the event handler once now to ensure everything is as it should be
+      handleNewSelection.apply($("#FullDigitization"));
+
+    });
+  </script>
+</body>
+
+</html>
